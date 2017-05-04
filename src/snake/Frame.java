@@ -7,7 +7,7 @@ public class Frame extends JFrame{
     public Frame(){
         super("Snake");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //add component
+        add(new GameBoard());
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
