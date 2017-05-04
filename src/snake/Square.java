@@ -4,6 +4,15 @@ public class Square {
     private int positionX = 300;
     private int positionY = 300;
     
+    public Square(){
+        
+    }
+    
+    public Square(int positionX, int positionY){
+        this.positionX = positionX;
+        this.positionY = positionY;
+    }
+    
     public int getSquarePositionX(){
         return positionX;
     }
@@ -13,7 +22,7 @@ public class Square {
     }
     
     public void setSquarePositionX(int x){
-        positionX += x;
+        positionX = x;
     }
     
     public void setSquarePositionY(int y){

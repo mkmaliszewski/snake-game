@@ -19,7 +19,17 @@ public class Snake {
         }
     }
     
-    public void updateSnake(){
+    public void updateSnake(int x, int y){
+        int positionX, positionY;
+        for (int i = snake.size() - 1; i > 0; i--){
+            positionX = snake.get(i - 1).getSquarePositionX();
+            positionY = snake.get(i - 1).getSquarePositionY();
+            
+            snake.get(i).setSquarePositionX(positionX);
+            snake.get(i).setSquarePositionY(positionY);
+        }
         
+        snake.get(0).setSquarePositionX(x);
+        snake.get(0).setSquarePositionY(y);
     }
 }

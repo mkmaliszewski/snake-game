@@ -6,9 +6,14 @@ import javax.swing.JFrame;
 public class Frame extends JFrame{
     public Frame(){
         super("Snake");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(new GameBoard());
+        
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.addKeyListener(gameBoard);
+        gameBoard.setFocusable(true);
+        add(gameBoard);
         pack();
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
