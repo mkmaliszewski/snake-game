@@ -1,12 +1,8 @@
 package snake;
 
 public class Square {
-    private int positionX = 300;
-    private int positionY = 300;
-    
-    public Square(){
-        
-    }
+    private int positionX;
+    private int positionY;
     
     public Square(int positionX, int positionY){
         this.positionX = positionX;

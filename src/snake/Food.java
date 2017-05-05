@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class Food {
     private final int foodSize;
-    private int positionX = 30;
-    private int positionY = 30;
+    private int positionX = 240;
+    private int positionY = 240;
     
     public Food(){
         foodSize = 30;
