@@ -30,15 +30,16 @@ public class GameBoard extends JPanel implements KeyListener{
         setPreferredSize(new Dimension(gameSize, gameSize));
         setBackground(Color.BLACK);
         
-        timer = new Timer(1000, new ActionListener(){
+        timer = new Timer(100, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-//                food.updateFoodPosition();
                 if(snake.checkIfSnakeIsOnFood(food.getFoodPositionX(), food.getFoodPositionY())){
                     snake.addNewSquare(moveX, moveY);
                     snake.addNewSquare(moveX, moveY);
                     snake.addNewSquare(moveX, moveY);
-                    food.updateFoodPosition();
+                    do {
+                        food.updateFoodPosition();
+                    } while (!snake.checkIfValidFoodPositions(food.getFoodPositionX(), food.getFoodPositionY()));
                 }
                 updateMovingDirection();
                 snake.updateSnake(moveX, moveY);

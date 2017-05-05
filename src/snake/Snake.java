@@ -46,4 +46,13 @@ public class Snake {
             return false;
         }
     }
+    
+    public boolean checkIfValidFoodPositions(int foodX, int foodY){
+        for (Square square : snake){
+            if (square.getSquarePositionX() == foodX && square.getSquarePositionY() == foodY){
+                return false;
+            }
+        }
+        return true;
+    }
 }

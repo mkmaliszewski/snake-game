@@ -1,6 +1,7 @@
 package snake;
 
 import java.awt.Graphics2D;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Food {
