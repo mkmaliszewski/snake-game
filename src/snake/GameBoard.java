@@ -17,6 +17,8 @@ public class GameBoard extends JPanel implements KeyListener{
     private Food food;
     private Timer timer;
     private int moveX, moveY;
+    private String move;
+    private boolean moveDone;
     
     public GameBoard(){
         gameSize = 600;
@@ -24,20 +26,20 @@ public class GameBoard extends JPanel implements KeyListener{
         moveY = 300;
         snake = new Snake();
         food = new Food();
-        
+        move = "none";
         setPreferredSize(new Dimension(gameSize, gameSize));
         setBackground(Color.BLACK);
         
-        timer = new Timer(1000, new ActionListener(){
+        timer = new Timer(500, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                food.updateFoodPosition();
+//                food.updateFoodPosition();
+                updateMovingDirection();
                 snake.updateSnake(moveX, moveY);
                 repaint();
+                moveDone = false;
             }
-        });
-        timer.start();
-        
+        });        
     }
     
     public void paintComponent(Graphics g){
@@ -58,18 +60,33 @@ public class GameBoard extends JPanel implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        if (!timer.isRunning()){
+            timer.start();
+        }
         
-        if (key == KeyEvent.VK_A){
-            moveX -= 30;
+        if (key == KeyEvent.VK_A && !moveDone){
+            if (move.equals("up") || move.equals("down") || move.equals("none")){
+                moveDone = true;
+                move = "left";
+            }
         }
-        if (key == KeyEvent.VK_D){
-            moveX += 30;
+        if (key == KeyEvent.VK_D && !moveDone){
+            if (move.equals("up") || move.equals("down") || move.equals("none")){
+                moveDone = true;
+                move = "right";
+            }
         }
-        if (key == KeyEvent.VK_W){
-            moveY -= 30;
+        if (key == KeyEvent.VK_W && !moveDone){
+            if (move.equals("left") || move.equals("right") || move.equals("none")){
+                moveDone = true;
+                move = "up";
+            }
         }
-        if (key == KeyEvent.VK_S){
-            moveY += 30;
+        if (key == KeyEvent.VK_S && !moveDone){
+            if (move.equals("left") || move.equals("right") || move.equals("none")){
+                moveDone = true;
+                move = "down";
+            }
         }
     }
 
@@ -78,5 +95,16 @@ public class GameBoard extends JPanel implements KeyListener{
         
     }
     
-    
+    public void updateMovingDirection(){
+        switch (move){
+            case "left":    moveX -= 30;
+                            break;
+            case "right":   moveX += 30;
+                            break;
+            case "up":      moveY -= 30;
+                            break;
+            case "down":    moveY += 30;
+                            break;
+        }
+    }
 }
