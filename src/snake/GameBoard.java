@@ -45,6 +45,9 @@ public class GameBoard extends JPanel implements KeyListener{
                 snake.updateSnake(moveX, moveY);
                 repaint();
                 moveDone = false;
+                if (snake.checkIfGameOver()){
+                    timer.stop();
+                }
             }
         });        
     }
@@ -71,25 +74,25 @@ public class GameBoard extends JPanel implements KeyListener{
             timer.start();
         }
         
-        if (key == KeyEvent.VK_A && !moveDone){
+        if ((key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) && !moveDone){
             if (move.equals("up") || move.equals("down") || move.equals("none")){
                 moveDone = true;
                 move = "left";
             }
         }
-        if (key == KeyEvent.VK_D && !moveDone){
+        if ((key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) && !moveDone){
             if (move.equals("up") || move.equals("down") || move.equals("none")){
                 moveDone = true;
                 move = "right";
             }
         }
-        if (key == KeyEvent.VK_W && !moveDone){
+        if ((key == KeyEvent.VK_W || key == KeyEvent.VK_UP) && !moveDone){
             if (move.equals("left") || move.equals("right") || move.equals("none")){
                 moveDone = true;
                 move = "up";
             }
         }
-        if (key == KeyEvent.VK_S && !moveDone){
+        if ((key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) && !moveDone){
             if (move.equals("left") || move.equals("right") || move.equals("none")){
                 moveDone = true;
                 move = "down";

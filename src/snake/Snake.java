@@ -55,4 +55,22 @@ public class Snake {
         }
         return true;
     }
+    
+    public boolean checkIfGameOver(){
+        int headX = snake.get(0).getSquarePositionX();
+        int headY = snake.get(0).getSquarePositionY();
+        
+        for (int i = 1; i < snake.size(); i++){
+            if (snake.get(i).getSquarePositionX() == headX &&
+                    snake.get(i).getSquarePositionY() == headY){
+                return true;
+            }
+        }
+        
+        if (headX < 0 || headX > 600 || headY < 0 || headY > 600){
+            return true;
+        }
+        
+        return false;
+    }
 }
