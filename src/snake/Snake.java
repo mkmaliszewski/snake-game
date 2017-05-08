@@ -67,4 +67,8 @@ public class Snake {
         return headX < 0 || headX > gameSize - squareSize ||
                 headY < 0 || headY > gameSize - squareSize;
     }
+    
+    public void clearSnake(){
+        snake.clear();        
+    }
 }

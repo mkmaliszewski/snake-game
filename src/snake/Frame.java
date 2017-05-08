@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 public class Frame extends JFrame{
     public Frame(){
         super("Snake");
+        setResizable(false);
         
         GameBoard gameBoard = new GameBoard();
         gameBoard.addKeyListener(gameBoard);
@@ -15,8 +16,7 @@ public class Frame extends JFrame{
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
+        setVisible(true);       
     }
     
     public static void main(String[] args){
