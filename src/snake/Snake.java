@@ -4,26 +4,27 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 public class Snake {
-    private LinkedList<Square> snake;
+    private final LinkedList<Square> snake;
     private final int squareSize;
     
-    public Snake(){
+    public Snake(int firstX, int firstY){
         snake = new LinkedList<>();
         squareSize = 30;
-        addNewSquare(300, 300);
+        addNewSquare(firstX, firstY);
     }
     
     public void paintSquare(Graphics2D g2d){        
-        for (int i = 0; i < snake.size(); i++){
-            g2d.fillRect(snake.get(i).getSquarePositionX(), snake.get(i).getSquarePositionY(), squareSize, squareSize);
+        for (Square square : snake){
+            g2d.fillRect(square.getSquarePositionX(), square.getSquarePositionY(),
+                    squareSize, squareSize);
         }
     }
     
-    public void addNewSquare(int posX, int posY){
-        snake.add(new Square(posX, posY));
+    public void addNewSquare(int positionX, int positionY){
+        snake.add(new Square(positionX, positionY));
     }
     
-    public void updateSnake(int x, int y){
+    public void updateSnake(int newHeadX, int newHeadY){
         int positionX, positionY;
         for (int i = snake.size() - 1; i > 0; i--){
             positionX = snake.get(i - 1).getSquarePositionX();
@@ -33,30 +34,26 @@ public class Snake {
             snake.get(i).setSquarePositionY(positionY);
         }
         
-        snake.get(0).setSquarePositionX(x);
-        snake.get(0).setSquarePositionY(y);
+        snake.get(0).setSquarePositionX(newHeadX);
+        snake.get(0).setSquarePositionY(newHeadY);
     }
     
     public boolean checkIfSnakeIsOnFood(int foodX, int foodY){
-        if (snake.get(0).getSquarePositionX() == foodX && 
-                snake.get(0).getSquarePositionY() == foodY){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return snake.get(0).getSquarePositionX() == foodX && 
+                snake.get(0).getSquarePositionY() == foodY;
     }
     
     public boolean checkIfValidFoodPositions(int foodX, int foodY){
         for (Square square : snake){
-            if (square.getSquarePositionX() == foodX && square.getSquarePositionY() == foodY){
+            if (square.getSquarePositionX() == foodX &&
+                    square.getSquarePositionY() == foodY){
                 return false;
             }
         }
         return true;
     }
     
-    public boolean checkIfGameOver(){
+    public boolean checkIfGameOver(int gameSize){
         int headX = snake.get(0).getSquarePositionX();
         int headY = snake.get(0).getSquarePositionY();
         
@@ -67,10 +64,7 @@ public class Snake {
             }
         }
         
-        if (headX < 0 || headX > 600 || headY < 0 || headY > 600){
-            return true;
-        }
-        
-        return false;
+        return headX < 0 || headX > gameSize - squareSize ||
+                headY < 0 || headY > gameSize - squareSize;
     }
 }

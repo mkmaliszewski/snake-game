@@ -5,11 +5,12 @@ import java.util.Random;
 
 public class Food {
     private final int foodSize;
-    private int positionX = 240;
-    private int positionY = 240;
+    private int positionX;
+    private int positionY;
     
     public Food(){
         foodSize = 30;
+        updateFoodPosition();
     }
     
     public int getFoodPositionX(){

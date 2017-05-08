@@ -24,34 +24,16 @@ public class GameBoard extends JPanel implements KeyListener{
         gameSize = 600;
         moveX = 300;
         moveY = 300;
-        snake = new Snake();
+        snake = new Snake(moveX, moveY);
         food = new Food();
         move = "none";
-        setPreferredSize(new Dimension(gameSize, gameSize));
-        setBackground(Color.BLACK);
+        setTimer();
         
-        timer = new Timer(100, new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(snake.checkIfSnakeIsOnFood(food.getFoodPositionX(), food.getFoodPositionY())){
-                    snake.addNewSquare(moveX, moveY);
-                    snake.addNewSquare(moveX, moveY);
-                    snake.addNewSquare(moveX, moveY);
-                    do {
-                        food.updateFoodPosition();
-                    } while (!snake.checkIfValidFoodPositions(food.getFoodPositionX(), food.getFoodPositionY()));
-                }
-                updateMovingDirection();
-                snake.updateSnake(moveX, moveY);
-                repaint();
-                moveDone = false;
-                if (snake.checkIfGameOver()){
-                    timer.stop();
-                }
-            }
-        });        
+        setPreferredSize(new Dimension(gameSize, gameSize));
+        setBackground(Color.BLACK);    
     }
     
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
@@ -116,5 +98,25 @@ public class GameBoard extends JPanel implements KeyListener{
             case "down":    moveY += 30;
                             break;
         }
+    }
+    
+    public void setTimer(){
+        timer = new Timer(100, (ActionEvent e) -> {
+            if(snake.checkIfSnakeIsOnFood(food.getFoodPositionX(), food.getFoodPositionY())){
+                snake.addNewSquare(moveX, moveY);
+                snake.addNewSquare(moveX, moveY);
+                snake.addNewSquare(moveX, moveY);
+                do {
+                    food.updateFoodPosition();
+                } while (!snake.checkIfValidFoodPositions(food.getFoodPositionX(), food.getFoodPositionY()));
+            }
+            updateMovingDirection();
+            snake.updateSnake(moveX, moveY);
+            repaint();
+            moveDone = false;
+            if (snake.checkIfGameOver(gameSize)){
+                timer.stop();
+            }
+        });
     }
 }
