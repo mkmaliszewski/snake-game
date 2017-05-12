@@ -14,8 +14,8 @@ import javax.swing.Timer;
 
 public class GameBoard extends JPanel implements KeyListener{
     private final int gameSize;
-    private Snake snake;
-    private Food food;
+    private final Snake snake;
+    private final Food food;
     private Timer timer;
     private int moveX, moveY, score;
     private String move;
@@ -141,6 +141,7 @@ public class GameBoard extends JPanel implements KeyListener{
     
     public void newGame(){
         snake.clearSnake();
+        move = "none";
         moveX = 300;
         moveY = 300;
         snake.addNewSquare(moveX, moveY);
