@@ -89,7 +89,7 @@ public class GameBoard extends JPanel implements KeyListener{
         
     }
     
-    public void updateMovingDirection(){
+    private void updateMovingDirection(){
         switch (move){
             case "left":    moveX -= 30;
                             break;
@@ -102,7 +102,7 @@ public class GameBoard extends JPanel implements KeyListener{
         }
     }
     
-    public void setTimer(){
+    private void setTimer(){
         timer = new Timer(100, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,7 +139,7 @@ public class GameBoard extends JPanel implements KeyListener{
         });
     }
     
-    public void newGame(){
+    private void newGame(){
         snake.clearSnake();
         move = "none";
         moveX = 300;
